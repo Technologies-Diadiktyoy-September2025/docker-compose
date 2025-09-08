@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test API Simple</title>
+</head>
+<body>
+    <h1>Test API Simple</h1>
+    <button onclick="testAPI()">Test Search Profiles API</button>
+    <div id="results"></div>
+    
+    <script>
+        async function testAPI() {
+            console.log('Testing API...');
+            document.getElementById('results').innerHTML = '<p>Testing API...</p>';
+            
+            try {
+                const response = await fetch('api/search_profiles.php?q=test');
+                const data = await response.json();
+                
+                console.log('API Response:', data);
+                document.getElementById('results').innerHTML = `
+                    <h3>API Response:</h3>
+                    <pre>${JSON.stringify(data, null, 2)}</pre>
+                `;
+            } catch (error) {
+                console.error('API Error:', error);
+                document.getElementById('results').innerHTML = `
+                    <h3>API Error:</h3>
+                    <p>${error.message}</p>
+                `;
+            }
+        }
+    </script>
+</body>
+</html>

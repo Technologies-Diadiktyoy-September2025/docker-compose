@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Login - My Site</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="brand"><span>My Site</span></div>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="help.html">Help</a>
+        <a href="register.php">Register</a>
+        <a href="login.php" aria-current="page">Login</a>
+      </nav>
+      <button class="theme-toggle" type="button" data-action="toggle-theme" aria-label="Toggle theme">Dark mode</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <h1>Sign In</h1>
+    <p class="muted">Enter your credentials to access your account</p>
+
+    
+    <form class="card" method="post" action="login.php" style="padding:16px; display:grid; gap:12px;">
+      <div>
+        <label for="username">Username</label><br>
+        <input type="text" id="username" name="username" required value="" style="width:100%; padding:10px; border:1px solid var(--border-color); background:var(--bg-color); color:var(--text-color); border-radius:8px;">
+      </div>
+      <div>
+        <label for="password">Password</label><br>
+        <input type="password" id="password" name="password" required style="width:100%; padding:10px; border:1px solid var(--border-color); background:var(--bg-color); color:var(--text-color); border-radius:8px;">
+      </div>
+      <div>
+        <button type="submit" class="theme-toggle" style="font-weight:600;">Sign In</button>
+      </div>
+    </form>
+
+    <div class="card" style="padding:16px; text-align:center; margin-top:16px;">
+      <p style="margin:0;">Don't have an account? <a href="register.php" style="color:var(--accent);">Create one here</a></p>
+    </div>
+
+    <p class="footer">© 2025 My Site</p>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
+

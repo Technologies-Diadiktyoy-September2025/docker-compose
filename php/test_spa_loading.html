@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Test SPA Loading</title>
+  </head>
+  <body>
+    <h1>Test SPA Loading</h1>
+    <div id="test-results"></div>
+
+    <script>
+      console.log("Test page loaded");
+
+      // Test if SPA file loads
+      const script = document.createElement("script");
+      script.src = "spa.js";
+      script.onload = function () {
+        console.log("SPA script loaded successfully");
+        document.getElementById("test-results").innerHTML +=
+          "<p>✅ SPA script loaded</p>";
+
+        // Check for JavaScript errors
+        try {
+          // Try to create SPA instance manually
+          if (typeof StreamingSPA !== 'undefined') {
+            console.log("StreamingSPA class found");
+            document.getElementById("test-results").innerHTML +=
+              "<p>✅ StreamingSPA class found</p>";
+            
+            // Try to create instance
+            try {
+              const testSpa = new StreamingSPA();
+              console.log("SPA instance created successfully:", testSpa);
+              document.getElementById("test-results").innerHTML +=
+                "<p>✅ SPA instance created successfully</p>";
+            } catch (error) {
+              console.error("Error creating SPA instance:", error);
+              document.getElementById("test-results").innerHTML +=
+                `<p>❌ Error creating SPA instance: ${error.message}</p>`;
+            }
+          } else {
+            console.error("StreamingSPA class not found");
+            document.getElementById("test-results").innerHTML +=
+              "<p>❌ StreamingSPA class not found</p>";
+          }
+        } catch (error) {
+          console.error("Error checking SPA:", error);
+          document.getElementById("test-results").innerHTML +=
+            `<p>❌ Error checking SPA: ${error.message}</p>`;
+        }
+
+        // Wait a bit for SPA to initialize
+        setTimeout(() => {
+          if (window.spa) {
+            console.log("SPA instance found:", window.spa);
+            document.getElementById("test-results").innerHTML +=
+              "<p>✅ SPA instance found</p>";
+
+            if (window.spa.searchProfiles) {
+              console.log("searchProfiles method found");
+              document.getElementById("test-results").innerHTML +=
+                "<p>✅ searchProfiles method found</p>";
+            } else {
+              console.error("searchProfiles method not found");
+              document.getElementById("test-results").innerHTML +=
+                "<p>❌ searchProfiles method not found</p>";
+            }
+          } else {
+            console.error("SPA instance not found");
+            document.getElementById("test-results").innerHTML +=
+              "<p>❌ SPA instance not found</p>";
+          }
+        }, 1000);
+      };
+      script.onerror = function () {
+        console.error("Failed to load SPA script");
+        document.getElementById("test-results").innerHTML +=
+          "<p>❌ Failed to load SPA script</p>";
+      };
+      document.head.appendChild(script);
+    </script>
+  </body>
+</html>

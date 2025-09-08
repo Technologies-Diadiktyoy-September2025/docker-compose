@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test SPA Minimal</title>
+</head>
+<body>
+    <h1>Test SPA Minimal</h1>
+    
+    <!-- Minimal required elements for SPA -->
+    <div id="modal"></div>
+    <div class="close"></div>
+    <div id="user-lists"></div>
+    <div id="followed-lists"></div>
+    <div id="create-list-form"></div>
+    <div id="search-form"></div>
+    
+    <!-- The profiles section -->
+    <div id="profiles" class="spa-container active">
+        <form id="search-profiles-form" onsubmit="return false;">
+            <input type="text" id="profile-search-query" placeholder="Enter username..." value="test">
+            <button type="button" id="search-profiles-btn">Search Users</button>
+        </form>
+        <div id="profile-search-results"></div>
+    </div>
+    
+    <div id="results"></div>
+    
+    <script>
+        console.log('Test page loaded');
+        
+        // Load SPA script
+        const script = document.createElement('script');
+        script.src = 'spa.js';
+        script.onload = function() {
+            console.log('SPA script loaded');
+            
+            // Wait a bit for SPA to initialize
+            setTimeout(() => {
+                if (window.spa) {
+                    console.log('SPA found:', window.spa);
+                    document.getElementById('results').innerHTML += '<p>✅ SPA loaded</p>';
+                    
+                    // Test the button
+                    const btn = document.getElementById('search-profiles-btn');
+                    if (btn) {
+                        console.log('Button found:', btn);
+                        document.getElementById('results').innerHTML += '<p>✅ Button found</p>';
+                        
+                        // Add test listener
+                        btn.addEventListener('click', function(e) {
+                            console.log('Button clicked!');
+                            e.preventDefault();
+                            document.getElementById('results').innerHTML += '<p>✅ Button clicked!</p>';
+                            
+                            // Try to call searchProfiles
+                            if (window.spa.searchProfiles) {
+                                console.log('Calling searchProfiles...');
+                                window.spa.searchProfiles();
+                            } else {
+                                console.error('searchProfiles method not found');
+                                document.getElementById('results').innerHTML += '<p>❌ searchProfiles not found</p>';
+                            }
+                        });
+                    } else {
+                        console.error('Button not found');
+                        document.getElementById('results').innerHTML += '<p>❌ Button not found</p>';
+                    }
+                } else {
+                    console.error('SPA not found');
+                    document.getElementById('results').innerHTML += '<p>❌ SPA not found</p>';
+                }
+            }, 2000);
+        };
+        script.onerror = function() {
+            console.error('Failed to load SPA script');
+            document.getElementById('results').innerHTML += '<p>❌ Failed to load SPA script</p>';
+        };
+        document.head.appendChild(script);
+    </script>
+</body>
+</html>

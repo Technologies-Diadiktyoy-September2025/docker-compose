@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Navigation Test</title>
+</head>
+<body>
+    <h1>Navigation Test</h1>
+    
+    <nav>
+        <a href="#" data-route="home">Home</a>
+        <a href="#" data-route="lists">My Lists</a>
+        <a href="#" data-route="search">Search</a>
+        <a href="#" data-route="profiles">Profiles</a>
+        <a href="#" data-route="profile">Profile</a>
+    </nav>
+    
+    <div id="home" class="spa-container" style="display: block;">
+        <h2>Home Page</h2>
+        <p>This is the home page</p>
+    </div>
+    
+    <div id="lists" class="spa-container" style="display: none;">
+        <h2>My Lists Page</h2>
+        <p>This is the lists page</p>
+    </div>
+    
+    <div id="search" class="spa-container" style="display: none;">
+        <h2>Search Page</h2>
+        <p>This is the search page</p>
+    </div>
+    
+    <div id="profiles" class="spa-container" style="display: none;">
+        <h2>Profiles Page</h2>
+        <p>This is the profiles page</p>
+    </div>
+    
+    <div id="profile" class="spa-container" style="display: none;">
+        <h2>Profile Page</h2>
+        <p>This is the profile page</p>
+    </div>
+    
+    <script>
+        console.log('Navigation test script loaded');
+        
+        class TestSPA {
+            constructor() {
+                console.log('TestSPA constructor called');
+                this.setupRouting();
+            }
+            
+            setupRouting() {
+                console.log('setupRouting() called');
+                const links = document.querySelectorAll('[data-route]');
+                console.log('Found navigation links:', links.length);
+                
+                links.forEach(link => {
+                    console.log('Setting up navigation for:', link, 'route:', link.getAttribute('data-route'));
+                    link.addEventListener('click', (e) => {
+                        console.log('Navigation link clicked:', e.target, 'route:', e.target.getAttribute('data-route'));
+                        e.preventDefault();
+                        const route = e.target.getAttribute('data-route');
+                        this.navigateTo(route);
+                    });
+                });
+            }
+            
+            navigateTo(route) {
+                console.log('navigateTo called with route:', route);
+                
+                // Hide all containers
+                const containers = document.querySelectorAll('.spa-container');
+                console.log('Found containers:', containers.length);
+                containers.forEach(container => {
+                    console.log('Hiding container:', container.id);
+                    container.style.display = 'none';
+                });
+
+                // Show target container
+                const targetContainer = document.getElementById(route);
+                console.log('Target container for route', route, ':', targetContainer);
+                if (targetContainer) {
+                    console.log('Showing container:', targetContainer.id);
+                    targetContainer.style.display = 'block';
+                } else {
+                    console.error('Target container not found for route:', route);
+                }
+            }
+        }
+        
+        // Initialize when DOM is ready
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('DOMContentLoaded - initializing TestSPA');
+            window.testSpa = new TestSPA();
+        });
+    </script>
+</body>
+</html>

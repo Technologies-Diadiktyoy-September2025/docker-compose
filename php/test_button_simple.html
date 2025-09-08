@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Button Simple</title>
+</head>
+<body>
+    <h1>Test Button Click</h1>
+    
+    <!-- Copy the exact button from spa.php -->
+    <form id="search-profiles-form" onsubmit="return false;">
+        <input type="text" id="profile-search-query" placeholder="Enter username, first name, or last name..." value="test">
+        <button type="button" id="search-profiles-btn">Search Users</button>
+    </form>
+    
+    <div id="results"></div>
+    
+    <script>
+        console.log('Test page loaded');
+        
+        // Test 1: Direct event listener
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM loaded');
+            const btn = document.getElementById('search-profiles-btn');
+            if (btn) {
+                console.log('Button found:', btn);
+                btn.addEventListener('click', function(e) {
+                    console.log('Button clicked directly!');
+                    e.preventDefault();
+                    document.getElementById('results').innerHTML = '<p>✅ Button click detected!</p>';
+                });
+            } else {
+                console.error('Button not found');
+            }
+        });
+        
+        // Test 2: Event delegation
+        document.addEventListener('click', function(e) {
+            console.log('Click detected on:', e.target, 'id:', e.target.id);
+            if (e.target && e.target.id === 'search-profiles-btn') {
+                console.log('Button clicked via delegation!');
+                e.preventDefault();
+                e.stopPropagation();
+                document.getElementById('results').innerHTML = '<p>✅ Button click detected via delegation!</p>';
+            }
+        });
+        
+        // Test 3: Global function
+        window.testButton = function() {
+            console.log('Test button function called');
+            document.getElementById('results').innerHTML = '<p>✅ Test function called!</p>';
+        };
+    </script>
+</body>
+</html>

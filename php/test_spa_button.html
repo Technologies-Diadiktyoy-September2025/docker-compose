@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test SPA Button</title>
+    <style>
+        .spa-container { display: none; }
+        .spa-container.active { display: block; }
+        .search-form { margin: 20px 0; }
+        .search-form input { padding: 8px; margin-right: 10px; }
+        .search-form button { padding: 8px 16px; }
+    </style>
+</head>
+<body>
+    <h1>Test SPA Button</h1>
+    
+    <!-- Copy the exact profiles section from spa.php -->
+    <div id="profiles" class="spa-container active">
+        <h1>User Profiles</h1>
+        <p class="muted">Search for users and follow them to see their public lists</p>
+        <div class="card" style="padding: 24px;">
+            <h2>Search Users</h2>
+            <form id="search-profiles-form" class="search-form" onsubmit="return false;">
+                <input type="text" id="profile-search-query" placeholder="Enter username, first name, or last name..." required>
+                <button type="button" id="search-profiles-btn">Search Users</button>
+            </form>
+            <div id="profile-search-results" class="list-grid">
+                <!-- Profile search results will be loaded here -->
+            </div>
+        </div>
+    </div>
+    
+    <div id="results"></div>
+    
+    <script src="spa.js"></script>
+    <script>
+        console.log('Test SPA Button page loaded');
+        
+        // Wait for SPA to load
+        setTimeout(() => {
+            if (window.spa) {
+                console.log('SPA found:', window.spa);
+                document.getElementById('results').innerHTML += '<p>✅ SPA loaded</p>';
+                
+                // Test the button directly
+                const btn = document.getElementById('search-profiles-btn');
+                if (btn) {
+                    console.log('Button found:', btn);
+                    document.getElementById('results').innerHTML += '<p>✅ Button found</p>';
+                    
+                    // Add our own test listener
+                    btn.addEventListener('click', function(e) {
+                        console.log('Our test listener triggered!');
+                        e.preventDefault();
+                        document.getElementById('results').innerHTML += '<p>✅ Our test listener worked!</p>';
+                        
+                        // Now try to call the SPA method
+                        if (window.spa && window.spa.searchProfiles) {
+                            console.log('Calling spa.searchProfiles()');
+                            window.spa.searchProfiles();
+                        } else {
+                            console.error('spa.searchProfiles not found');
+                            document.getElementById('results').innerHTML += '<p>❌ spa.searchProfiles not found</p>';
+                        }
+                    });
+                } else {
+                    console.error('Button not found');
+                    document.getElementById('results').innerHTML += '<p>❌ Button not found</p>';
+                }
+            } else {
+                console.error('SPA not found');
+                document.getElementById('results').innerHTML += '<p>❌ SPA not found</p>';
+            }
+        }, 1000);
+    </script>
+</body>
+</html>
