@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Debug Edit Button</title>
+  </head>
+  <body>
+    <h1>Debug Edit Button</h1>
+
+    <div id="test-container">
+      <div class="list-card">
+        <h3>Test List</h3>
+        <div class="list-actions">
+          <a
+            href="#"
+            data-action="edit-list"
+            data-list-id="123"
+            class="btn btn-secondary"
+            >Edit</a
+          >
+          <a
+            href="#"
+            data-action="view-list"
+            data-list-id="123"
+            class="btn btn-primary"
+            >View</a
+          >
+        </div>
+      </div>
+    </div>
+
+    <div id="debug-output"></div>
+
+    <script>
+      const debugOutput = document.getElementById("debug-output");
+
+      // Test event listener
+      document.addEventListener("click", (e) => {
+        debugOutput.innerHTML +=
+          "<p>Click detected on: " +
+          e.target.tagName +
+          " with class: " +
+          e.target.className +
+          "</p>";
+
+        if (e.target.matches('[data-action="edit-list"]')) {
+          e.preventDefault();
+          debugOutput.innerHTML +=
+            '<p style="color: green;">✅ Edit button clicked! List ID: ' +
+            e.target.dataset.listId +
+            "</p>";
+        } else if (e.target.matches('[data-action="view-list"]')) {
+          e.preventDefault();
+          debugOutput.innerHTML +=
+            '<p style="color: blue;">✅ View button clicked! List ID: ' +
+            e.target.dataset.listId +
+            "</p>";
+        } else {
+          debugOutput.innerHTML +=
+            '<p style="color: gray;">Click on: ' +
+            e.target.textContent +
+            "</p>";
+        }
+      });
+
+      // Test if elements exist
+      setTimeout(() => {
+        const editButtons = document.querySelectorAll(
+          '[data-action="edit-list"]'
+        );
+        const viewButtons = document.querySelectorAll(
+          '[data-action="view-list"]'
+        );
+
+        debugOutput.innerHTML +=
+          "<p>Found " + editButtons.length + " edit buttons</p>";
+        debugOutput.innerHTML +=
+          "<p>Found " + viewButtons.length + " view buttons</p>";
+
+        if (editButtons.length > 0) {
+          debugOutput.innerHTML +=
+            '<p>Edit button attributes: data-action="' +
+            editButtons[0].getAttribute("data-action") +
+            '", data-list-id="' +
+            editButtons[0].getAttribute("data-list-id") +
+            '"</p>';
+        }
+      }, 100);
+    </script>
+  </body>
+</html>

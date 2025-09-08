@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Register</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="header-inner">
+        <div class="brand"><span>My Site</span></div>
+        <nav>
+          <a href="index.html">Home</a>
+          <a href="help.html">Help</a>
+          <a href="register.html" aria-current="page">Register</a>
+        </nav>
+        <button
+          class="theme-toggle"
+          type="button"
+          data-action="toggle-theme"
+          aria-label="Toggle theme"
+        >
+          Dark mode
+        </button>
+      </div>
+    </header>
+
+    <main class="container">
+      <h1>Create your account</h1>
+      <form
+        class="card"
+        method="post"
+        action="register.php"
+        style="padding: 16px; display: grid; gap: 12px"
+      >
+        <div>
+          <label for="first_name">First name</label><br />
+          <input
+            type="text"
+            id="first_name"
+            name="first_name"
+            required
+            style="
+              width: 100%;
+              padding: 10px;
+              border: 1px solid var(--border-color);
+              background: var(--bg-color);
+              color: var(--text-color);
+              border-radius: 8px;
+            "
+          />
+        </div>
+        <div>
+          <label for="last_name">Last name</label><br />
+          <input
+            type="text"
+            id="last_name"
+            name="last_name"
+            required
+            style="
+              width: 100%;
+              padding: 10px;
+              border: 1px solid var(--border-color);
+              background: var(--bg-color);
+              color: var(--text-color);
+              border-radius: 8px;
+            "
+          />
+        </div>
+        <div>
+          <label for="username">Username</label><br />
+          <input
+            type="text"
+            id="username"
+            name="username"
+            required
+            style="
+              width: 100%;
+              padding: 10px;
+              border: 1px solid var(--border-color);
+              background: var(--bg-color);
+              color: var(--text-color);
+              border-radius: 8px;
+            "
+          />
+        </div>
+        <div>
+          <label for="password">Password</label><br />
+          <input
+            type="password"
+            id="password"
+            name="password"
+            required
+            minlength="6"
+            style="
+              width: 100%;
+              padding: 10px;
+              border: 1px solid var(--border-color);
+              background: var(--bg-color);
+              color: var(--text-color);
+              border-radius: 8px;
+            "
+          />
+        </div>
+        <div>
+          <label for="email">Email</label><br />
+          <input
+            type="email"
+            id="email"
+            name="email"
+            required
+            style="
+              width: 100%;
+              padding: 10px;
+              border: 1px solid var(--border-color);
+              background: var(--bg-color);
+              color: var(--text-color);
+              border-radius: 8px;
+            "
+          />
+        </div>
+        <div>
+          <button type="submit" class="theme-toggle" style="font-weight: 600">
+            Register
+          </button>
+        </div>
+      </form>
+      <p class="footer">
+        ©
+        <script>
+          document.write(new Date().getFullYear());
+        </script>
+        My Site
+      </p>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
